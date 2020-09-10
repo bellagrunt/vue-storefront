@@ -115,8 +115,7 @@ export interface UseCart
 <
   CART,
   CART_ITEM,
-  PRODUCT,
-  COUPON
+  PRODUCT
 > {
   cart: ComputedProperty<CART>;
   addToCart: (product: PRODUCT, quantity: number) => Promise<void>;
@@ -124,7 +123,6 @@ export interface UseCart
   removeFromCart: (product: CART_ITEM,) => Promise<void>;
   updateQuantity: (product: CART_ITEM, quantity?: number) => Promise<void>;
   clearCart: () => Promise<void>;
-  coupon: ComputedProperty<COUPON | null>;
   applyCoupon: (coupon: string) => Promise<void>;
   removeCoupon: () => Promise<void>;
   loadCart: () => Promise<void>;
@@ -213,6 +211,7 @@ export interface CartGetters<CART, CART_ITEM> {
   getShippingPrice: (cart: CART) => number;
   getTotalItems: (cart: CART) => number;
   getFormattedPrice: (price: number) => string;
+  getCoupon: (cart: CART) => AgnosticCoupon;
   [getterName: string]: (element: any, options?: any) => unknown;
 }
 
@@ -288,6 +287,12 @@ export interface AgnosticCategoryTree {
   slug?: string;
   items: AgnosticCategoryTree[];
   [x: string]: unknown;
+}
+
+export interface AgnosticCoupon {
+  id: string;
+  name: string;
+  code: string;
 }
 
 export interface AgnosticPrice {
