@@ -293,6 +293,7 @@ export interface AgnosticCoupon {
   id: string;
   name: string;
   code: string;
+  value: number;
 }
 
 export interface AgnosticPrice {
